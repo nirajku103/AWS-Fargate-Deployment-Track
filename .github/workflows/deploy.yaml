@@ -47,19 +47,19 @@ jobs:
       - name: Generate Unique Image Tag
         run: echo "IMAGE_TAG=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
 
-      - name: Build and Push Docker Image for Service 1
-        run: |
-          cd services/service1
-          docker build -t service1:$IMAGE_TAG .
-          docker tag service1:$IMAGE_TAG $ECR_REPO_SERVICE1:$IMAGE_TAG
-          docker push $ECR_REPO_SERVICE1:$IMAGE_TAG
+      # - name: Build and Push Docker Image for Service 1
+      #   run: |
+      #     cd services/service1
+      #     docker build -t service1:$IMAGE_TAG .
+      #     docker tag service1:$IMAGE_TAG $ECR_REPO_SERVICE1:$IMAGE_TAG
+      #     docker push $ECR_REPO_SERVICE1:$IMAGE_TAG
 
-      - name: Build and Push Docker Image for Service 2
-        run: |
-          cd services/service2
-          docker build -t service2:$IMAGE_TAG .
-          docker tag service2:$IMAGE_TAG $ECR_REPO_SERVICE2:$IMAGE_TAG
-          docker push $ECR_REPO_SERVICE2:$IMAGE_TAG
+      # - name: Build and Push Docker Image for Service 2
+      #   run: |
+      #     cd services/service2
+      #     docker build -t service2:$IMAGE_TAG .
+      #     docker tag service2:$IMAGE_TAG $ECR_REPO_SERVICE2:$IMAGE_TAG
+      #     docker push $ECR_REPO_SERVICE2:$IMAGE_TAG
 
       - name: Running Terraform Apply with dev.tfvars and Image URIs
         run: |
@@ -69,3 +69,7 @@ jobs:
             -var-file=dev.tfvars \
             -var="service1_image=$ECR_REPO_SERVICE1:$IMAGE_TAG" \
             -var="service2_image=$ECR_REPO_SERVICE2:$IMAGE_TAG"
+
+          # terraform destroy -auto-approve \
+          #   -var-file=dev.tfvars \
+          #   -var="image_uri=$ECR_REPO_APP:$IMAGE_TAG"
