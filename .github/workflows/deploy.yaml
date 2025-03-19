@@ -7,9 +7,9 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-2
-  ECR_REPO_SERVICE1: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/service1
-  ECR_REPO_SERVICE2: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-2.amazonaws.com/service2
+  AWS_REGION: us-east-1
+  ECR_REPO_SERVICE1: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/service1
+  ECR_REPO_SERVICE2: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/service2
   ECS_CLUSTER: dev-ecs-cluster
   ECS_SERVICE1: dev-ecs-cluster-service1
   ECS_SERVICE2: dev-ecs-cluster-service2
