@@ -1,9 +1,10 @@
 
 terraform {
   backend "s3" {
-    bucket         = "devops-hackathon"
+    bucket         = "lamda-deployment-bucket-uc"
     key            = "terraform"
-    region         = "us-east-1"
+    region         = "eu-west-1"
+    dynamodb_table = "terraform-locks"
     encrypt        = true
   }
 }
