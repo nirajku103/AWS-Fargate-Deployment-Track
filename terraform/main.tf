@@ -86,3 +86,12 @@ module "ecs_cluster" {
 #  alb_security_groups   = var.alb_security_groups
   vpc_id                = module.vpc.vpc_id
 }
+
+module "cloudtrail" {
+  source                        = "./modules/cloudtrail"
+  name                          = "aws-fargate-deployment-cloudtrail"
+  s3_bucket_name                = "aws-fargate-deployment-cloudtrail-logs-${var.region}"
+  include_global_service_events = true
+  is_multi_region_trail         = true
+  enable_logging                = true
+}
