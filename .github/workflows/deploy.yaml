@@ -7,7 +7,7 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-1
+  AWS_REGION: eu-west-1
   ECR_REPO_SERVICE1: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/service1
   ECR_REPO_SERVICE2: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/service2
   ECS_CLUSTER: dev-ecs-cluster
@@ -47,19 +47,19 @@ jobs:
       - name: Generate Unique Image Tag
         run: echo "IMAGE_TAG=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
 
-      - name: Build and Push Docker Image for Service 1
-        run: |
-          cd services/service1
-          docker build -t service1:$IMAGE_TAG .
-          docker tag service1:$IMAGE_TAG $ECR_REPO_SERVICE1:$IMAGE_TAG
-          docker push $ECR_REPO_SERVICE1:$IMAGE_TAG
+      # - name: Build and Push Docker Image for Service 1
+      #   run: |
+      #     cd services/service1
+      #     docker build -t service1:$IMAGE_TAG .
+      #     docker tag service1:$IMAGE_TAG $ECR_REPO_SERVICE1:$IMAGE_TAG
+      #     docker push $ECR_REPO_SERVICE1:$IMAGE_TAG
 
-      - name: Build and Push Docker Image for Service 2
-        run: |
-          cd services/service2
-          docker build -t service2:$IMAGE_TAG .
-          docker tag service2:$IMAGE_TAG $ECR_REPO_SERVICE2:$IMAGE_TAG
-          docker push $ECR_REPO_SERVICE2:$IMAGE_TAG
+      # - name: Build and Push Docker Image for Service 2
+      #   run: |
+      #     cd services/service2
+      #     docker build -t service2:$IMAGE_TAG .
+      #     docker tag service2:$IMAGE_TAG $ECR_REPO_SERVICE2:$IMAGE_TAG
+      #     docker push $ECR_REPO_SERVICE2:$IMAGE_TAG
 
       - name: Running Terraform Apply with dev.tfvars and Image URIs
         run: |
