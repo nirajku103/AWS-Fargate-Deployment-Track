@@ -8,6 +8,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list = [
     "sts.amazonaws.com"
+    
   ]
 
   thumbprint_list = [
@@ -30,7 +31,7 @@ resource "aws_iam_role" "github_actions_role" {
         }
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" : "repo:nirajku102/AWS-Fargate-Deployment-Track:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" : "repo:nirajku103/AWS-Fargate-Deployment-Track:ref:refs/heads/main"
           }
         }
       }
